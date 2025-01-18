@@ -6,9 +6,9 @@ import requests
 from io import BytesIO
 
 # تحميل البيانات من ملف Excel
-#url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
-#response =requests.get(url)
-#df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
+url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+response =requests.get(url)
+df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
 
 # استبدل هذا بالرابط المباشر لملف Excel
 url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
