@@ -1,0 +1,3 @@
+pip install pdfkit
+pip install weasyprint
+python app.py

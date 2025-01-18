@@ -1,0 +1,36 @@
+from dash import Dash, html, dcc
+import pandas as pd
+
+# قراءة ملف Excel
+data_path = r"D:\GD\full2024.xlsx"  # تأكد من صحة المسار
+df = pd.read_excel(data_path)
+
+# إنشاء تطبيق Dash
+app = Dash(__name__)
+
+# إعداد العنوان والشعار
+app.layout = html.Div(style={'fontFamily': 'Cairo'}, children=[
+    # القسم العلوي: الشعار والعنوان
+    html.Div(style={'textAlign': 'center', 'marginBottom': '20px'}, children=[
+        html.Img(src="/assets/logo.png", style={'width': '100px', 'height': 'auto'}),
+        html.H1("المؤشرات الدولية حول ليبيا", style={'marginTop': '10px'})
+    ]),
+    # القسم الرئيسي: عرض البيانات
+    html.Div(children=[
+        html.H3("نظرة عامة على البيانات", style={'textAlign': 'center'}),
+        dcc.Graph(
+            id='data-table',
+            figure={
+                'data': [{
+                    'type': 'table',
+                    'header': {'values': list(df.columns)},  # أسماء الأعمدة
+                    'cells': {'values': [df[col] for col in df.columns]}  # قيم الأعمدة
+                }]
+            }
+        )
+    ])
+])
+
+# تشغيل التطبيق
+if __name__ == '__main__':
+    app.run_server(debug=True)
