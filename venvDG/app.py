@@ -3,8 +3,10 @@ from dash import dcc, html, Input, Output, State
 import plotly.express as px
 import pandas as pd
 
-# تحميل البيانات من ملف Excel
-df = pd.read_excel(r'D:\Indicators\full2024.xlsx', sheet_name='DB')
+url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+response =requests.get(url)
+df = pd.read_excel(BytesIO(responsecontent), sheet_name='DB')
+#df = pd.read_excel(r'D:\Indicators\full2024.xlsx', sheet_name='DB')
 
 # طباعة أسماء الأعمدة للتحقق
 print("أسماء الأعمدة في ملف Excel:")
