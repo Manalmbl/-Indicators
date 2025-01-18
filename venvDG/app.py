@@ -3,10 +3,19 @@ from dash import dcc, html, Input, Output, State
 import plotly.express as px
 import pandas as pd
 
-url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
-response =requests.get(url)
-df = pd.read_excel(BytesIO(responsecontent), sheet_name='DB')
+#url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+#response =requests.get(url)
+#df = pd.read_excel(BytesIO(responsecontent), sheet_name='DB')
 #df = pd.read_excel(r'D:\Indicators\full2024.xlsx', sheet_name='DB')
+
+uploaded_file = st.file_uploader("قم بتحميل ملف Excel", type=["xlsx", "xls"])
+if uploaded_file is not None:
+    if uploaded_file.name == "full2024.xlsx":  # تأكد من أن الملف هو المطلوب
+        df = pd.read_excel(uploaded_file)
+        st.write("تم تحميل الملف بنجاح!")
+        st.write(df)  # عرض البيانات
+    else:
+        st.error("الملف الذي تم تحميله ليس 'full2024.xlsx'.")
 
 # طباعة أسماء الأعمدة للتحقق
 print("أسماء الأعمدة في ملف Excel:")
