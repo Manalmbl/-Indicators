@@ -2,6 +2,8 @@ import dash
 from dash import dcc, html, Input, Output, State
 import plotly.express as px
 import pandas as pd
+import requests
+from io import BytesIO
 
 # تحميل البيانات من ملف Excel
 #url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
