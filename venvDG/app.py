@@ -13,7 +13,7 @@ from io import BytesIO
 # استبدل هذا بالرابط المباشر لملف Excel
 
 # الرابط المباشر لملف Excel
-url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/export?format=xlsx"
+url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
 
 # جلب الملف من الرابط
 response = requests.get(url)
