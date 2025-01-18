@@ -4,8 +4,24 @@ import plotly.express as px
 import pandas as pd
 
 # تحميل البيانات من ملف Excel
+#url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+#response =requests.get(url)
+#df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
+
+# استبدل هذا بالرابط المباشر لملف Excel
 url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
-df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
+response = requests.get(url)
+
+if response.status_code == 200:
+    try:
+        # قراءة الملف باستخدام المحرك المناسب
+        df = pd.read_excel(BytesIO(response.content), engine='openpyxl', sheet_name='DB')
+        print("تم تحميل البيانات بنجاح!")
+        print(df.head())  # عرض أول 5 صفوف من البيانات
+    except Exception as e:
+        print(f"حدث خطأ أثناء قراءة الملف: {e}")
+else:
+    print(f"فشل جلب البيانات. رمز الحالة: {response.status_code}")
 
 #df = pd.read_excel(r'D:\Indicators\full2024.xlsx', sheet_name='DB')
 
