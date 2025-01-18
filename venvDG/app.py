@@ -6,9 +6,9 @@ import requests
 from io import BytesIO
 
 # تحميل البيانات من ملف Excel
-url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
-response =requests.get(url)
-df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
+#url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+#response =requests.get(url)
+#df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
 
 # استبدل هذا بالرابط المباشر لملف Excel
 url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
@@ -28,8 +28,8 @@ else:
 #df = pd.read_excel(r'D:\Indicators\full2024.xlsx', sheet_name='DB')
 
 # طباعة أسماء الأعمدة للتحقق
-#print("أسماء الأعمدة في ملف Excel:")
-#print(df.columns)
+print("أسماء الأعمدة في ملف Excel:")
+print(df.columns)
 
 # إعادة تسمية الأعمدة إذا كانت مختلفة
 df = df.rename(columns={
