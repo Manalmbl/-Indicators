@@ -28,8 +28,8 @@ else:
 #df = pd.read_excel(r'D:\Indicators\full2024.xlsx', sheet_name='DB')
 
 # طباعة أسماء الأعمدة للتحقق
-print("أسماء الأعمدة في ملف Excel:")
-print(df.columns)
+#print("أسماء الأعمدة في ملف Excel:")
+#print(df.columns)
 
 # إعادة تسمية الأعمدة إذا كانت مختلفة
 df = df.rename(columns={
