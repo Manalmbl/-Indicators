@@ -11,9 +11,14 @@ from io import BytesIO
 #df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
 
 # استبدل هذا بالرابط المباشر لملف Excel
-url="https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+
+# الرابط المباشر لملف Excel
+url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/export?format=xlsx"
+
+# جلب الملف من الرابط
 response = requests.get(url)
 
+# التحقق من نجاح الطلب
 if response.status_code == 200:
     try:
         # قراءة الملف باستخدام المحرك المناسب
@@ -25,11 +30,12 @@ if response.status_code == 200:
 else:
     print(f"فشل جلب البيانات. رمز الحالة: {response.status_code}")
 
-#df = pd.read_excel(r'D:\Indicators\full2024.xlsx', sheet_name='DB')
-
-# طباعة أسماء الأعمدة للتحقق
-print("أسماء الأعمدة في ملف Excel:")
-print(df.columns)
+# التحقق من وجود df قبل استخدامه
+if 'df' in locals():
+    print("أسماء الأعمدة في ملف Excel:")
+    print(df.columns)
+else:
+    print("لم يتم تحميل البيانات بنجاح.")
 
 # إعادة تسمية الأعمدة إذا كانت مختلفة
 df = df.rename(columns={
