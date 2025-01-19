@@ -27,6 +27,12 @@ except Exception as e:
     df = pd.DataFrame()  # إنشاء DataFrame فارغ لتجنب الأخطاء لاحقًا
 
 ############
+# التحقق من وجود df قبل استخدامه
+if not df.empty:
+    print("أسماء الأعمدة في ملف Excel:")
+    print(df.columns)
+else:
+    print("لم يتم تحميل البيانات بنجاح.")
 
 # إعادة تسمية الأعمدة إذا كانت مختلفة
 if not df.empty:
