@@ -8,10 +8,17 @@ from io import BytesIO
 # رابط الملف المباشر (raw URL)
 file_url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
 
+# محاولة تحميل البيانات
 try:
-    # تحميل البيانات من رابط Google Sheets
-    response = requests.get(file_url)
+    # تحويل رابط Google Sheets إلى رابط مباشر للتنزيل
+    file_id = file_url.split("/d/")[1].split("/")[0]
+    download_url = f"https://docs.google.com/spreadsheets/d/{file_id}/export?format=xlsx"
+    
+    # تحميل الملف
+    response = requests.get(download_url)
     response.raise_for_status()  # التحقق من نجاح الطلب
+    
+    # قراءة الملف باستخدام pandas
     df = pd.read_excel(BytesIO(response.content))
     print("تم قراءة الملف بنجاح:")
     print(df.head())
