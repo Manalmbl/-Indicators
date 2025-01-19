@@ -10,26 +10,17 @@ from io import BytesIO
 #response =requests.get(url)
 #df = pd.read_excel(BytesIO(response.content), sheet_name='DB')
 
-# استبدل هذا بالرابط المباشر لملف Excel
 
-# الرابط المباشر لملف Excel
-url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+# رابط الملف المباشر (raw URL)
+file_url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
 
-# جلب الملف من الرابط
-response = requests.get(url)
-
-# التحقق من نجاح الطلب
-if response.status_code == 200:
-    try:
-        # قراءة الملف باستخدام المحرك المناسب
-        df = pd.read_excel(BytesIO(response.content), engine='openpyxl', sheet_name='DB')
-        print("تم تحميل البيانات بنجاح!")
-        print(df.head())  # عرض أول 5 صفوف من البيانات
-    except Exception as e:
-        print(f"حدث خطأ أثناء قراءة الملف: {e}")
-else:
-    print(f"فشل جلب البيانات. رمز الحالة: {response.status_code}")
-
+try:
+    # قراءة ملف Excel من الرابط
+    df = pd.read_excel(file_url)
+    print("تم قراءة الملف بنجاح:")
+    print(df.head())
+except Exception as e:
+    print(f"حدث خطأ أثناء قراءة الملف: {e}")
 # التحقق من وجود df قبل استخدامه
 if 'df' in locals():
     print("أسماء الأعمدة في ملف Excel:")
