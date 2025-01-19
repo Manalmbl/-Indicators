@@ -100,9 +100,9 @@ df['لون الاقتصاد الرقمي'] = df['الاقتصاد الرقمي']
 
 # إنشاء تطبيق Dash
 app = dash.Dash(__name__)
-# تشغيل الخادم على المنفذ 8051
+# تشغيل الخادم على المنفذ 8052
 if __name__ == "__main__":
-    app.run_server(port=8051)
+    app.run_server(port=8052, use_reloader=False)
 # تصميم واجهة التطبيق
 app.layout = html.Div(style={
     'background': 'linear-gradient(135deg, #001f3f, #003366)',  # تدرج لوني من الأزرق الداكن إلى الأزرق الأغمق
