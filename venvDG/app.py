@@ -102,8 +102,8 @@ df['لون الاقتصاد الرقمي'] = df['الاقتصاد الرقمي']
 app = dash.Dash(__name__)
 # تشغيل الخادم على المنفذ 8055
 if __name__ == "__main__":
-    app.run_server(debug=True,port=8055, use_reloader=False)
-    @app.server.errorhandler(Exception)
+app.run_server(debug=True,port=8055, use_reloader=False)
+@app.server.errorhandler(Exception)
 def handle_error(e):
     return f"An error occurred: {str(e)}", 500
 
