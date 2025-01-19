@@ -5,37 +5,22 @@ import pandas as pd
 import requests
 from io import BytesIO
 
-# رابط الملف المباشر (raw URL)
-file_url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/edit?usp=sharing&ouid=114865501761148318139&rtpof=true&sd=true"
+# رابط الملف (يمكن تغييره إلى مسار ملف محلي إذا لزم الأمر)
+file_url = "https://docs.google.com/spreadsheets/d/1jfmKtvJheeTtEsmjE88zWomQteid2NBn/export?format=xlsx"
 
-# محاولة تحميل البيانات
+# تنزيل الملف من الرابط (إذا كان الملف محليًا، استخدم المسار بدلًا من file_url)
 try:
-    # تحويل رابط Google Sheets إلى رابط مباشر للتنزيل
-    file_id = file_url.split("/d/")[1].split("/")[0]
-    download_url = f"https://docs.google.com/spreadsheets/d/{file_id}/export?format=xlsx"
-    
-    # تحميل الملف
-    response = requests.get(download_url)
-    response.raise_for_status()  # التحقق من نجاح الطلب
-    
-    # قراءة الملف باستخدام pandas
-    df = pd.read_excel(BytesIO(response.content))
-    print("تم قراءة الملف بنجاح:")
-    print(df.head())
+    response = requests.get(file_url)
+    response.raise_for_status()  # التحقق من أن الطلب نجح
+    file_content = BytesIO(response.content)  # تحويل المحتوى إلى BytesIO
+    df = pd.read_excel(file_content)  # قراءة الملف
 except Exception as e:
     print(f"حدث خطأ أثناء قراءة الملف: {e}")
-    df = pd.DataFrame()  # إنشاء DataFrame فارغ لتجنب الأخطاء لاحقًا
+    exit()
 
-############
-# التحقق من وجود df قبل استخدامه
+# التحقق من أن DataFrame ليس فارغًا
 if not df.empty:
-    print("أسماء الأعمدة في ملف Excel:")
-    print(df.columns)
-else:
-    print("لم يتم تحميل البيانات بنجاح.")
-
-# إعادة تسمية الأعمدة إذا كانت مختلفة
-if not df.empty:
+    # إعادة تسمية الأعمدة
     df = df.rename(columns={
         'السنة': 'السنة',
         'الدولة': 'الدولة',
@@ -55,6 +40,7 @@ if not df.empty:
         'الاقتصاد الرقمي': 'الاقتصاد الرقمي',
         'flg': 'flg'
     })
+
 else:
     print("لا يمكن إعادة تسمية الأعمدة لأن DataFrame فارغ.")
 
